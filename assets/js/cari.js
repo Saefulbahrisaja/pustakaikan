@@ -7,7 +7,7 @@ $(document).ready(function () {
         $(this).html("SEARCHING...").attr("disabled", "disabled");
 
           $.ajax({
-              url: baseurl + 'siswa/search', // File tujuan
+              url: '/utama/search', // File tujuan
               type: 'POST', // Tentukan type nya POST atau GET
               data: {
                   keyword: $("#keyword").val()
@@ -23,7 +23,7 @@ $(document).ready(function () {
                   // Dan hapus atribut disabled untuk meng-enable kembali button search nya
                   $("#btn-search").html("SEARCH").removeAttr("disabled");
 
-                  // Ganti isi dari div view dengan view yang diambil dari controller siswa function search
+                  // Ganti isi dari div view dengan view yang diambil dari controller function search
                   $("#view").html(response.hasil);
               },
               error: function(xhr, ajaxOptions, thrownError) { // Ketika terjadi error
