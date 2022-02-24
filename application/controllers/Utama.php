@@ -125,8 +125,6 @@ class Utama extends CI_Controller
         $this->load->view('depan/tampilan/footer');
     }
 
-    
-
     function tentangkami()
     {
         $ip    = $this->input->ip_address(); // Mendapatkan IP user
