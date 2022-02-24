@@ -31,10 +31,7 @@ class Admin extends CI_Controller
 
     function input($num = '')
     {
-        //Counter
-        
-        $perpage = 2;
-        $offset = $this->uri->segment(1);
+
         $data['data'] = $this->m_ikan->get_all_ikan();
         $data['title'] = "Data Ikan";
         $this->load->view('belakang/tampilan/header', $data);
