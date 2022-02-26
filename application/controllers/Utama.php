@@ -81,7 +81,6 @@ class Utama extends CI_Controller
         $data = array_merge($data, $this->get_hitstat());
 
         $data['title']  = "Kategori";
-        // $id = $this->uri->segment(3);
         $data['detail'] = $this->m_kategori->per_kategori($id);
         $data['menu']   = $this->fetch_sidebar_menu();
 
