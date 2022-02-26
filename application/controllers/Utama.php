@@ -18,6 +18,12 @@ class Utama extends CI_Controller
         $data = array_merge($data, $this->get_hitstat());
 
         $perpage = 2;
+        $offset = $num;
+
+        $data['title'] = "Fishpedia";
+        $data['menu']  = $this->fetch_sidebar_menu();
+        $data['data']  = $this->m_utama->get_all_ikan($perpage, $offset);
+
         $config['base_url'] = site_url();
         $config['total_rows'] = $this->m_utama->getAll()->num_rows();
         $config['per_page'] = $perpage;
@@ -40,7 +46,7 @@ class Utama extends CI_Controller
         $config['first_tag_open'] = '<li class="page-item">';
         $config['first_tag_close'] = '</li>';
         $config['attributes'] = ['class' => "page-link"];
-        
+
         $this->pagination->initialize($config);
 
         $data['top'] = $this->m_utama->get_top_ikan();
@@ -73,7 +79,7 @@ class Utama extends CI_Controller
     {
         $data = [];
         $data = array_merge($data, $this->get_hitstat());
-        
+
         $data['title']  = "Kategori";
         // $id = $this->uri->segment(3);
         $data['detail'] = $this->m_kategori->per_kategori($id);
@@ -97,7 +103,7 @@ class Utama extends CI_Controller
 
         $data['title'] = "Tentang Kami";
         $data['menu']  = $this->fetch_sidebar_menu();
-        
+
         // Compose View
         $this->load->view('layouts/app', [
             'head' => '',
@@ -113,13 +119,13 @@ class Utama extends CI_Controller
     {
         $data = [];
         $data = array_merge($data, $this->get_hitstat());
-        
+
         $data['title']   = "Selengkapnya";
         $data['detail']  = $this->m_utama->per_id($id);
         $data['menu']    = $this->fetch_sidebar_menu();
 
         $maps = $this->m_utama->sebaran($id);
-        $hasil = array_map(fn($row) => [
+        $hasil = array_map(fn ($row) => [
             $row->deskripsi_sebaran, $row->latitude, $row->longitude
         ], $maps);
         // $hasil = array();
@@ -143,12 +149,12 @@ class Utama extends CI_Controller
     public function fetch_sidebar_menu()
     {
         $data = $this->m_utama->get_menu();
-        
+
         $menu = "";
         foreach ($data as $item) {
             $menu .= "
                 <ul class='list-unstyled mb-0'>
-                    <li><a href=" . site_url('Utama/kategori/' .encrypt_url($item->kd_kategori)) . ">" . $item->nm_kategori . "</a></li>
+                    <li><a href=" . site_url('Utama/kategori/' . encrypt_url($item->kd_kategori)) . ">" . $item->nm_kategori . "</a></li>
                 </ul>
             ";
         }

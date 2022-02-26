@@ -16,7 +16,7 @@ class M_ikan extends CI_Model
             ->join('tb_famili', 'tb_ikan.id_famili=tb_famili.id_famili')
             ->join('tb_genus', 'tb_ikan.id_genus=tb_genus.id_genus')
             ->join('tb_ordo', 'tb_ikan.id_ordo=tb_ordo.id_ordo')
-        ->join('tb_kategori', 'tb_ikan.kd_kategori=tb_kategori.kd_kategori')
+            ->join('tb_kategori', 'tb_ikan.kd_kategori=tb_kategori.kd_kategori')
             ->join('tb_spesies', 'tb_ikan.id_spesies=tb_spesies.id_spesies')
              ->order_by('kd_ikan','ASC');
         $hasil= $this->db->get();
