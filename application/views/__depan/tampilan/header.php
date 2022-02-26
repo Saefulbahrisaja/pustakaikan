@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <title><?php echo $title; ?></title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="<?= base_url('assets/favicon.ico') ?>" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="<?php echo base_url('assets/css/styles.css') ?>" rel="stylesheet" />
 </head>

@@ -31,7 +31,7 @@ class M_utama extends CI_Model
     {
         $this->db->select('*')
                  ->from('tb_ikan')
-                ->join('tb_kategori', 'tb_ikan.kd_kategori=tb_kategori.kd_kategori')
+                 ->join('tb_kategori', 'tb_ikan.kd_kategori=tb_kategori.kd_kategori')
                  ->order_by('tgl_post','DESC')
                  ->limit('1','1');
         $hasil = $this->db->get();
@@ -54,6 +54,9 @@ class M_utama extends CI_Model
 
     public function search($keyword)
     {
+        $this->db->select('tb_ikan.*, tb_kategori.nm_kategori');
+        $this->db->join('tb_kategori', 'tb_ikan.kd_kategori=tb_kategori.kd_kategori');
+        
         $this->db->like('nama_ikan', $keyword);
         $this->db->or_like('nama_ilmiah', $keyword);
         $this->db->or_like('deskripsi', $keyword);

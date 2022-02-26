@@ -54,5 +54,5 @@ $route['default_controller'] = 'utama';
 $route['(:any)'] = "utama/index/$1";
 
 //$route['utama/kategori/(:any)'] = 'kategori//index/$1';
-$route['404_override'] = 'Custom404';
+$route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
