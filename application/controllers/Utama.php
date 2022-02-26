@@ -18,12 +18,6 @@ class Utama extends CI_Controller
         $data = array_merge($data, $this->get_hitstat());
 
         $perpage = 2;
-        $offset = $num;
-
-        $data['title'] = "Fishpedia";
-        $data['menu']  = $this->fetch_sidebar_menu();
-        $data['data']  = $this->m_utama->get_all_ikan($perpage, $offset);
-        
         $config['base_url'] = site_url();
         $config['total_rows'] = $this->m_utama->getAll()->num_rows();
         $config['per_page'] = $perpage;
