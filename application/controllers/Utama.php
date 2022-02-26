@@ -39,7 +39,7 @@ class Utama extends CI_Controller
 
         $perpage = 2;
         $offset = $this->uri->segment(1);
-        $data['title']   = "Fishpedia";
+        $data['title']   = "Pustaka Ikan";
         $menu = $this->m_utama->get_menu();
         $data['menu'] = $this->fetch_menu($menu);
         
