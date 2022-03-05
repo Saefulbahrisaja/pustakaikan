@@ -5,27 +5,25 @@ class Utama extends CI_Controller
     {
         parent::__construct();
 
-        $this->load->model('depan/m_utama'); //load model crud_model
-        $this->load->model('depan/m_kategori');
-        $this->load->model('m_hitstat');
-
-        $this->load->library('tampilan');
+        $this->load->model('ikan_model');
+        $this->load->model('kategori_model');
+        $this->load->model('sebaran_model');
+        $this->load->model('hitstat_model');
     }
 
     function index(int $num = 0)
     {
-        $data = [];
-        $data = array_merge($data, $this->get_hitstat());
+        $data = $this->get_hitstat();
 
         $perpage = 2;
         $offset = $num;
 
         $data['title'] = "Fishpedia";
         $data['menu']  = $this->fetch_sidebar_menu();
-        $data['data']  = $this->m_utama->get_all_ikan($perpage, $offset);
+        $data['data']  = $this->ikan_model->get_all_by_limit($perpage, $offset);
 
         $config['base_url'] = site_url();
-        $config['total_rows'] = $this->m_utama->getAll()->num_rows();
+        $config['total_rows'] = $this->ikan_model->count();
         $config['per_page'] = $perpage;
         $config['next_link'] = 'Selanjutnya';
         $config['prev_link'] = 'Sebelumnya';
@@ -49,7 +47,7 @@ class Utama extends CI_Controller
 
         $this->pagination->initialize($config);
 
-        $data['top'] = $this->m_utama->get_top_ikan();
+        $data['top'] = $this->ikan_model->get_latest_ikan();
 
         // Compose View
         $this->load->view('layouts/app', [
@@ -65,10 +63,10 @@ class Utama extends CI_Controller
     public function search()
     {
         $keyword = $this->input->post('keyword');
-        $data = $this->m_utama->search($keyword);
+        $data    = $this->ikan_model->search($keyword);
 
         $result = $this->load->view('pages/utama/search', [
-            'data' => $data,
+            'data'    => $data,
             'keyword' => $keyword,
         ], true);
 
@@ -77,11 +75,10 @@ class Utama extends CI_Controller
 
     function kategori($id)
     {
-        $data = [];
-        $data = array_merge($data, $this->get_hitstat());
+        $data = $this->get_hitstat();
 
         $data['title']  = "Kategori";
-        $data['detail'] = $this->m_kategori->per_kategori($id);
+        $data['detail'] = $this->ikan_model->get_all_by_kategori(decrypt_url($id));
         $data['menu']   = $this->fetch_sidebar_menu();
 
         // Compose View
@@ -97,8 +94,7 @@ class Utama extends CI_Controller
 
     function tentangkami()
     {
-        $data = [];
-        $data = array_merge($data, $this->get_hitstat());
+        $data = $this->get_hitstat();
 
         $data['title'] = "Tentang Kami";
         $data['menu']  = $this->fetch_sidebar_menu();
@@ -116,21 +112,18 @@ class Utama extends CI_Controller
 
     function detail($id)
     {
-        $data = [];
-        $data = array_merge($data, $this->get_hitstat());
+        $data = $this->get_hitstat();
 
         $data['title']   = "Selengkapnya";
-        $data['detail']  = $this->m_utama->per_id($id);
+        $data['detail']  = [
+            $this->ikan_model->first_by_id(decrypt_url($id)),
+        ];
         $data['menu']    = $this->fetch_sidebar_menu();
 
-        $maps = $this->m_utama->sebaran($id);
+        $maps = $this->sebaran_model->get_all_by_ikan(decrypt_url($id));
         $hasil = array_map(fn ($row) => [
             $row->deskripsi_sebaran, $row->latitude, $row->longitude
         ], $maps);
-        // $hasil = array();
-        // foreach ($maps as $row) {
-        //     $hasil[] = array($row->deskripsi_sebaran, $row->latitude, $row->longitude);
-        // }
 
         $data['lokasi'] = $hasil;
 
@@ -147,13 +140,13 @@ class Utama extends CI_Controller
 
     public function fetch_sidebar_menu()
     {
-        $data = $this->m_utama->get_menu();
+        $data = $this->kategori_model->get_all();
 
         $menu = "";
         foreach ($data as $item) {
             $menu .= "
                 <ul class='list-unstyled mb-0'>
-                    <li><a href=" . site_url('Utama/kategori/' . encrypt_url($item->kd_kategori)) . ">" . $item->nm_kategori . "</a></li>
+                    <li><a href=" . site_url('utama/kategori/' . encrypt_url($item->kd_kategori)) . ">" . $item->nm_kategori . "</a></li>
                 </ul>
             ";
         }
@@ -162,21 +155,16 @@ class Utama extends CI_Controller
 
     private function get_hitstat()
     {
-        //Counter
         $ip    = $this->input->ip_address(); // Mendapatkan IP user
         $date  = date("Y-m-d"); // Mendapatkan tanggal sekarang
 
-        // Naikan Jumlah Visitor berdasar ip dan tanggal
-        $this->m_hitstat->increment_visitor($ip, $date);
+        $this->hitstat_model->increment_visitor($ip, $date);
 
-        // Hitung Pengunjung Hari Ini
-        $pengunjung_hari_ini = $this->m_hitstat->get_visitor_count(compact('date'));
+        $pengunjung_hari_ini = $this->hitstat_model->get_visitor_count(compact('date'));
 
-        // Hitung Pengunjung
-        $total_pengunjung = $this->m_hitstat->get_visitor_hits_count();
+        $total_pengunjung = $this->hitstat_model->get_visitor_hits_count();
 
-        // Hitung Pengunjung Online
-        $pengunjung_online = $this->m_hitstat->get_visitor_online_count();
+        $pengunjung_online = $this->hitstat_model->get_visitor_online_count();
 
         return compact('pengunjung_hari_ini', 'total_pengunjung', 'pengunjung_online');
     }

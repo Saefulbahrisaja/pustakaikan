@@ -12,7 +12,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <div class="small text-muted"><?php echo $row->nm_kategori; ?></div>
                 <h2 class="card-title"><?php echo $row->nama_ikan; ?> <i>(<?php echo $row->nama_ilmiah; ?>)</i></h2>
                 <p class="card-text"><?php echo substr($row->deskripsi, 0, 250); ?> ...</p>
-                <a class="btn btn-primary" href="<?php echo base_url() . 'Utama/detail'; ?>/<?php echo encrypt_url($row->kd_ikan); ?>">Selengkapnya →</a>
+                <a class="btn btn-primary" href="<?php echo base_url() . 'utama/detail'; ?>/<?php echo encrypt_url($row->kd_ikan); ?>">Selengkapnya →</a>
             </div>
         </div>
     <?php endforeach; ?>
@@ -27,7 +27,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         <div class="small text-muted"><?php echo $row->nm_kategori; ?></div>
                         <h2 class="card-title h4"><?php echo $row->nama_ikan; ?> <i>(<?php echo $row->nama_ilmiah; ?>)</i></h2>
                         <p class="card-text"><?php echo substr($row->deskripsi, 0, 150); ?> ...</p>
-                        <a class="btn btn-primary" href="<?php echo base_url() . 'Utama/detail'; ?>/<?php echo encrypt_url($row->kd_ikan); ?>">Selengkapnya →</a>
+                        <a class="btn btn-primary" href="<?php echo base_url() . 'utama/detail'; ?>/<?php echo encrypt_url($row->kd_ikan); ?>">Selengkapnya →</a>
                     </div>
                 </div>
             </div>

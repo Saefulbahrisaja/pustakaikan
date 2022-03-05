@@ -12,8 +12,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
     <meta name="author" content="" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 
-    <!-- bootstrap cdn  -->
-    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"> -->
     <title><?= $title ?></title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="<?= base_url('assets/favicon.ico') ?>" />
@@ -33,7 +31,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" href="<?= base_url() ?>">Home</a></li>
 
-                    <li class="nav-item"><a class="nav-link" aria-current="page" href="<?= site_url('Utama/tentangkami') ?>">About</a></li>
+                    <li class="nav-item"><a class="nav-link" aria-current="page" href="<?= site_url('utama/tentangkami') ?>">About</a></li>
                 </ul>
             </div>
         </div>

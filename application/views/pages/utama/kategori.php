@@ -18,7 +18,7 @@
                         <div class="small text-muted"><?php echo $row->nm_kategori; ?></div>
                         <h2 class="card-title h4"><?php echo $row->nama_ikan; ?> (<?php echo $row->nama_ilmiah; ?>)</h2>
                         <p class="card-text"><?php echo substr($row->deskripsi, 0, 150); ?>.</p>
-                        <a class="btn btn-primary" href="<?= site_url('Utama/detail/' . encrypt_url($row->kd_ikan)) ?>">Selengkapnya →</a>
+                        <a class="btn btn-primary" href="<?= site_url('utama/detail/' . encrypt_url($row->kd_ikan)) ?>">Selengkapnya →</a>
                     </div>
                 </div>
                 <!-- Blog post-->
