@@ -51,7 +51,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'utama';
 
-$route['(:any)'] = "utama/index/$1";
+// $route['(:any)'] = "utama/index/$1";
+$route['admin'] = 'admin/auth/index';
+$route['admin/login'] = 'admin/auth/login';
+$route['admin/logout'] = 'admin/auth/logout';
+
+$route['admin/home'] = 'admin/home';
+$route['admin/profile'] = 'admin/home/profile';
+$route['admin/ikan'] = 'admin/ikan';
 
 //$route['utama/kategori/(:any)'] = 'kategori//index/$1';
 $route['404_override'] = '';
