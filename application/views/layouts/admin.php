@@ -16,10 +16,23 @@
 
     <title><?= $title ?></title>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <!-- DataTables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
+    
+    <!-- FontAwesome 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+
+    <!-- AdminKit -->
     <link href="<?= base_url('theme/css/app.css') ?>" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <!-- Select2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-theme@0.1.0-beta.10/dist/select2-bootstrap.min.css" integrity="sha256-nbyata2PJRjImhByQzik2ot6gSHSU4Cqdz5bNYL2zcU=" crossorigin="anonymous">
 
     <?= $head ?>
 </head>
@@ -41,10 +54,29 @@
         </div>
     </div>
 
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
+    <!-- AdminKit -->
     <script src="<?= base_url('theme/js/app.js') ?>"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- DataTables -->
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+    <!-- Image Preview -->
+    <script type="text/javascript" src="<?= base_url('assets/js/image-preview.js') ?>"></script>
+
+    <!-- Select2 -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.full.min.js" integrity="sha256-vjFnliBY8DzX9jsgU/z1/mOuQxk7erhiP0Iw35fVhTU=" crossorigin="anonymous"></script>
+
+    <!-- Select2 Bootstrap Theme -->
+    <script type="text/javascript">
+        $.fn.select2.defaults.set("theme", "bootstrap");
+    </script>
+
+    <!-- AlphineJs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.7.0/cdn.min.js" integrity="sha512-snKy1ArwmuMarok87UQk7lVf2AmQ/Mw2Zv2ziPX0hpoAu/uGQSxf0AaqtQPgp0DJ51Kb7veRL4aNcIIBlk8YSQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <?= $tail ?>
 </body>

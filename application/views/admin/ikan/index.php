@@ -2,13 +2,23 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
+<?php if ($this->session->has_userdata('status')): ?>
+	<div class="alert alert-info">
+		<?= $this->session->userdata('status') ?>
+	</div>
+<?php endif ?>
+
 <h1 class="h3 mb-3">Data Ikan</h1>
 
 <div class="row">
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-				<h5 class="card-title mb-0"><button class="btn btn-success btn-sm">Tambah Data</button></h5><br>
+				<h5 class="card-title">
+					<a href="<?= site_url('admin/ikan/store') ?>" class="btn btn-success btn-sm">Tambah Data</a>
+				</h5>
+			</div>
+			<div class="card-body">
 				<table id="table" class="table table-striped table-bordered table-sm w-100">
 					<thead class="thead-dark">
 						<tr>
@@ -57,15 +67,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								</td>
 								<td>
 									<button class="btn btn-sm btn-warning">Edit</button>
-									<button class="btn btn-sm btn-danger">Hapus</button>
+									<a onclick="return confirm('Yakin ingin dihapus?')" href="<?= site_url('admin/ikan/destroy/' . $row->kd_ikan) ?>" class="btn btn-sm btn-danger">Hapus</a>
 									<button class="btn btn-sm btn-success">Detail</button>
 								</td>
 							</tr>
 						<?php endforeach; ?>
 					</tbody>
 				</table>
-			</div>
-			<div class="card-body">
 			</div>
 		</div>
 	</div>
