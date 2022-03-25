@@ -139,6 +139,8 @@ class Ikan extends Admin_Controller
 
         if ($ikan = $this->ikan_model->first_by_id($kd_ikan))
         {
+            $ikan->sebarans = (array) $this->sebaran_model->get_all_by_ikan($ikan->kd_ikan);
+            // dd((array) $ikan);
             if ($this->input->method() == 'post')
             {
                 $this->form_validation->set_rules('nama_ikan', 'Nama Ikan', 'required');
@@ -156,7 +158,7 @@ class Ikan extends Admin_Controller
 
                     $optional_attribute = [];
 
-                    if (isset($_FILES['photo']))
+                    if (isset($_FILES['photo']) && $_FILES['photo']['error'] != 4)
                     {
                         $photo = $this->file_upload->storeAs('photo', './profil/uploads', 'jpg|png|jpeg|gif');
 
@@ -167,8 +169,6 @@ class Ikan extends Admin_Controller
                         else
                         {
                             $optional_attribute['photo'] = '/profil/uploads/' . $photo['data']['file_name'];
-
-
                         }
                     }
 
@@ -178,7 +178,9 @@ class Ikan extends Admin_Controller
                     $id_famili = $this->family_model->first_id_or_create(['famili' => $data['famili']]);
                     $id_spesies = $this->species_model->first_id_or_create(['spesies' => $data['spesies']]);
 
-                    $kd_ikan = $this->ikan_model->store([
+                    $kd_ikan = $this->ikan_model->update([
+                        'kd_ikan' => $ikan->kd_ikan,
+                    ], [
                         'nama_ikan' => $data['nama_ikan'],
                         'nama_ilmiah' => $data['nama_ilmiah'],
                         'deskripsi' => $data['deskripsi'],
@@ -199,10 +201,11 @@ class Ikan extends Admin_Controller
                             }
 
                             $this->sebaran_model->sync([
+                                'kd_ikan' => $kd_ikan,
+                            ],[
                                 'latitude' => $penyebaran['latitude'],
                                 'longitude' => $penyebaran['longitude'],
                                 'deskripsi_sebaran' => $penyebaran['deskripsi_sebaran'],
-                                'kd_ikan' => $kd_ikan,
                             ]);
                         }
                     }
@@ -219,17 +222,18 @@ class Ikan extends Admin_Controller
 
             $errors = array_merge($errors, $this->form_validation->error_array());
 
-            $this->render_page('Tambah Ikan',
-                $this->render_view('admin/ikan/create', [
+            return $this->render_page('Tambah Ikan',
+                $this->render_view('admin/ikan/edit', [
                     'ordos' => $this->ordo_model->get_all(),
                     'genusses' => $this->genus_model->get_all(),
                     'families' => $this->family_model->get_all(),
                     'speciesses' => $this->species_model->get_all(),
                     'kategoris' => $this->kategori_model->get_all(),
+                    'data' => (array) $ikan,
                     'errors' => $errors,
                 ]),
                 '',
-                $this->render_view('admin/ikan/create_script')
+                $this->render_view('admin/ikan/edit_script')
             );
         }
 

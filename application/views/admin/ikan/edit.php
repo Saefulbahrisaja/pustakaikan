@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 
-<h1 class="h3 mb-3">Tambah Ikan</h1>
+<h1 class="h3 mb-3">Edit Ikan</h1>
 
 <div class="row">
 	<div class="col-12">
@@ -15,11 +15,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<?php endif; ?>
 		<div class="card">
 			<div class="card-header">
-				<form action="<?= site_url('admin/ikan/store') ?>" method="post" class="card-body" enctype="multipart/form-data">
+				<form action="<?= site_url('admin/ikan/update/' . $data['kd_ikan']) ?>" method="post" class="card-body" enctype="multipart/form-data">
 					<div class="form-group" data-toggle="image-preview">
 						<label class="font-weight-bold">Gambar Ikan</label>
 						<input type="file" name="photo" class="d-none" data-source="true" accept="image/*">
-						<img src="<?= base_url('assets/images/empty-image.png') ?>" role="button" class="d-block img-thumbnail" width="300" height="300" data-target="true">
+						<img src="<?= isset($data['photo']) ? $data['photo'] : base_url('assets/images/empty-image.png') ?>" role="button" class="d-block img-thumbnail" width="300" height="300" data-target="true">
 					</div>
 					<div class="form-group">
 						<label>Nama Ikan</label>
@@ -37,7 +37,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<label>Kategori</label>
 						<select class="form-control" name="kategori" data-toggle="select2" data-tags="true" data-placeholder="Kategori">
 							<?php foreach ($kategoris as $kategori): ?>
-								<option <?= $data['id_kategori'] == $kategori->kd_kategori ? 'selected' : '' ?>><?= $kategori->nm_kategori ?></option>
+								<option <?= $data['kd_kategori'] == $kategori->kd_kategori ? 'selected' : '' ?>><?= $kategori->nm_kategori ?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>
@@ -83,17 +83,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									<th>Deskripsi</th>
 								</tr>
 							</thead>
-							<tbody x-data="{ sebarans: <?= json_encode(isset($data['sebarans']) && !empty($data['sebarans']) ? $data['sebarans'] : [])  ?> }">
+							<tbody x-data='{ sebarans: <?= json_encode(isset($data['sebarans']) && !empty($data['sebarans']) ? $data['sebarans'] : [])  ?> }'>
 								<template x-for="(sebaran, i) in sebarans">
 									<tr>
 										<td>
-											<input type="text" x-bind:name="`penyebaran[${i}][latitude]`" class="form-control" x-model="sebaran.latitude" required>
+											<input type="text" x-bind:name="`penyebaran[${i}][latitude]`" class="form-control" x-bind:value="sebaran.latitude" required>
 										</td>
 										<td>
-											<input type="text" x-bind:name="`penyebaran[${i}][longitude]`" class="form-control" x-model="sebaran.longitude" required>
+											<input type="text" x-bind:name="`penyebaran[${i}][longitude]`" class="form-control" x-bind:value="sebaran.longitude" required>
 										</td>
 										<td>
-											<input type="text" x-bind:name="`penyebaran[${i}][deskripsi_sebaran]`" class="form-control" x-model="sebaran.deskripsi" required>
+											<input type="text" x-bind:name="`penyebaran[${i}][deskripsi_sebaran]`" class="form-control" x-bind:value="sebaran.deskripsi_sebaran" required>
 										</td>
 									</tr>
 								</template>

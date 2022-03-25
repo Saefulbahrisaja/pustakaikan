@@ -64,7 +64,7 @@ class Ikan_model extends CI_Model
 		->join('tb_ordo','tb_ikan.id_ordo=tb_ordo.id_ordo', 'left')
 		->join('tb_spesies','tb_ikan.id_spesies=tb_spesies.id_spesies', 'left')
 		->where('kd_ikan', $kd_ikan);
-        
+
         return $this->db->get()->row();
 	}
 
@@ -97,6 +97,11 @@ class Ikan_model extends CI_Model
 		$this->db->insert('tb_ikan', $data);
 
 		return $this->db->insert_id();
+	}
+
+	public function update($where, $data)
+	{
+		return $this->db->where($where)->update('tb_ikan', $data);
 	}
 
 	public function delete($where)

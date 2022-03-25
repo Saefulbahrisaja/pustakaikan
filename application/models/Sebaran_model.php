@@ -24,4 +24,10 @@ class Sebaran_model extends CI_Model
 	{
 		return $this->db->from('tb_sebaran')->where($where)->delete();
 	}
+
+	public function sync($where, $data)
+	{
+		$this->db->where($where)->delete('tb_sebaran');
+		return $this->db->insert('tb_sebaran', $where + $data);
+	}
 }

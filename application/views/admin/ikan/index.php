@@ -66,7 +66,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									</table>
 								</td>
 								<td>
-									<button class="btn btn-sm btn-warning">Edit</button>
+									<a class="btn btn-sm btn-warning" href="<?= site_url('admin/ikan/update/' . $row->kd_ikan) ?>">Edit</a>
 									<a onclick="return confirm('Yakin ingin dihapus?')" href="<?= site_url('admin/ikan/destroy/' . $row->kd_ikan) ?>" class="btn btn-sm btn-danger">Hapus</a>
 									<button class="btn btn-sm btn-success">Detail</button>
 								</td>
