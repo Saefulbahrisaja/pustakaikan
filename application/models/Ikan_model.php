@@ -8,11 +8,11 @@ class Ikan_model extends CI_Model
 		$this->db
 		->select('*')
         ->from('tb_ikan')
-        ->join('tb_famili', 'tb_ikan.id_famili=tb_famili.id_famili')
-        ->join('tb_genus', 'tb_ikan.id_genus=tb_genus.id_genus')
-        ->join('tb_ordo', 'tb_ikan.id_ordo=tb_ordo.id_ordo')
-        ->join('tb_kategori', 'tb_ikan.kd_kategori=tb_kategori.kd_kategori')
-        ->join('tb_spesies', 'tb_ikan.id_spesies=tb_spesies.id_spesies')
+        ->join('tb_famili', 'tb_ikan.id_famili = tb_famili.id_famili')
+        ->join('tb_genus', 'tb_ikan.id_genus = tb_genus.id_genus')
+        ->join('tb_ordo', 'tb_ikan.id_ordo = tb_ordo.id_ordo')
+        ->join('tb_kategori', 'tb_ikan.kd_kategori = tb_kategori.kd_kategori')
+        ->join('tb_spesies', 'tb_ikan.id_spesies = tb_spesies.id_spesies')
         ->order_by('kd_ikan', 'ASC');
 
         return $this->db->get()->result();
@@ -58,13 +58,13 @@ class Ikan_model extends CI_Model
 		$this->db
 		->select("*")
 		->from('tb_ikan')
-		->join('tb_kategori', 'tb_kategori.kd_kategori = tb_ikan.kd_ikan')
-		->join('tb_famili','tb_ikan.id_famili=tb_famili.id_famili')
-		->join('tb_genus', 'tb_ikan.id_genus=tb_genus.id_genus')
-		->join('tb_ordo','tb_ikan.id_ordo=tb_ordo.id_ordo')
-		->join('tb_spesies','tb_ikan.id_spesies=tb_spesies.id_spesies')
+		->join('tb_kategori', 'tb_kategori.kd_kategori = tb_ikan.kd_ikan', 'left')
+		->join('tb_famili','tb_ikan.id_famili=tb_famili.id_famili', 'left')
+		->join('tb_genus', 'tb_ikan.id_genus=tb_genus.id_genus', 'left')
+		->join('tb_ordo','tb_ikan.id_ordo=tb_ordo.id_ordo', 'left')
+		->join('tb_spesies','tb_ikan.id_spesies=tb_spesies.id_spesies', 'left')
 		->where('kd_ikan', $kd_ikan);
-        
+
         return $this->db->get()->row();
 	}
 
@@ -90,5 +90,22 @@ class Ikan_model extends CI_Model
 		$result = $this->db->get()->row();
 
 		return $result->total;
+	}
+
+	public function store($data)
+	{
+		$this->db->insert('tb_ikan', $data);
+
+		return $this->db->insert_id();
+	}
+
+	public function update($where, $data)
+	{
+		return $this->db->where($where)->update('tb_ikan', $data);
+	}
+
+	public function delete($where)
+	{
+		return $this->db->from('tb_ikan')->where($where)->delete();
 	}
 }

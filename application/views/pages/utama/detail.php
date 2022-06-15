@@ -11,7 +11,7 @@
         <div class="card mb-4">
             <a href="#!"><img class="card-img-top" src="<?php echo $row->photo; ?>" alt="..." /></a>
             <div class="card-body">
-                <div class="small text-muted">Ikan Air Tawar</div>
+                <div class="small text-muted"><?= $row->nm_kategori ?></div>
                 <h2 class="card-title"><?php echo $row->nama_ikan; ?> (<?php echo $row->nama_ilmiah; ?>)</h2>
                 <p class="card-text"><?php echo $row->deskripsi; ?></p>
                 <p class="card-text">
