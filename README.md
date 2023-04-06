@@ -1,4 +1,4 @@
-# Website perpustakaan digital
+# Website ikan perpustakaan digital
 
 Website ini merupakan website perpustakaan digital tentang ikan-ikan yang ada di Indonesia
 
